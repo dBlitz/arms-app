@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var object_controller = require('../controller/object_controller');
 var cors = require('cors')
+const fs = require('fs');
 
 api.use(bodyParser.json());
 
@@ -16,7 +17,22 @@ api.use((req, res, next) => {
 
 api.get('/vertices', async function(req, res, next) {
 
-	console.log("hello")
+	let rawdata = fs.readFileSync('vertices.json');
+	let vertices_per_plane = JSON.parse(rawdata);
+
+	var vertices = vertices_per_plane['planes']
+	var x;
+	var y;
+	var z;
+
+	for (let i = 0; i < vertices.length; i++) {
+		x = parseFloat(vertices[i][0])
+		y = parseFloat(vertices[i][1])
+		z = parseFloat(vertices[i][2])
+
+		console.log([x, y, z])
+
+	}
 
 	return res.json("hello")
 
