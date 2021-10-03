@@ -1,0 +1,26 @@
+
+version: '3.1'
+
+services:
+  web:
+    build: .
+    environment:
+      NODE_ENV: test
+      DB_HOST: db
+      POSTGRES_DB: user_testdb
+    ports:
+      - "80:80"
+    depends_on:
+      - "db"
+    entrypoint: ["sh", "sequelize-docker.sh"]
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: user_testdb
+    ports:
+      - "8001:5432"
+

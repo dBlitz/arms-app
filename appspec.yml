@@ -1,0 +1,11 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:us-west-1:291095889361:task-definition/user-microservice-task:4"
+        LoadBalancerInfo:
+          ContainerName: "user-microservice-container"
+          ContainerPort: 80
+
+
