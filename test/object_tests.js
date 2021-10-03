@@ -9,6 +9,19 @@ let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 chai.use(chaiHttp);
 
 
+describe('/GET Object Vertices', () => {
+  it('it should respond with an object vertices per plane', (done) => {
+    chai.request(app)
+    .get('/object/vertices')
+    // .set('Accept', 'application/json')
+    .end((err, res) => {
+      res.should.have.status(200);
+      console.log(res.body);
+      done();
+    });
+  });
+});
+
 // describe('/POST Create User', () => {
 //   it('it should create a User', (done) => {
 //     chai.request(app)
@@ -71,18 +84,6 @@ chai.use(chaiHttp);
 // https://www.oauth.com/oauth2-servers/token-introspection-endpoint/
 
 
-describe('/GET Object Vertices', () => {
-  it('it should respond with an object vertices per plane', (done) => {
-    chai.request(app)
-    .get('/object/vertices')
-    // .set('Accept', 'application/json')
-    .end((err, res) => {
-      res.should.have.status(200);
-      // console.log(res.body);
-      done();
-    });
-  });
-});
 
 // describe('/GET  By ID', () => {
 //   it('it should GET user by ID', (done) => {

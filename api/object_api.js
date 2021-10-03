@@ -20,21 +20,27 @@ api.get('/vertices', async function(req, res, next) {
 	let rawdata = fs.readFileSync('vertices.json');
 	let vertices_per_plane = JSON.parse(rawdata);
 
+	let the_vertices = [];
+
 	var vertices = vertices_per_plane['planes']
 	var x;
 	var y;
 	var z;
+
 
 	for (let i = 0; i < vertices.length; i++) {
 		x = parseFloat(vertices[i][0])
 		y = parseFloat(vertices[i][1])
 		z = parseFloat(vertices[i][2])
 
-		console.log([x, y, z])
+		the_vertices.push([x, y, z])
+		// console.log([x, y, z])
 
 	}
 
-	return res.json("hello")
+	var jsonObj = JSON.stringify({'planes':the_vertices});
+
+	return res.json(jsonObj)
 
 	// return res.json()
 	// var all_users = await user_controller.getUsers_All();
