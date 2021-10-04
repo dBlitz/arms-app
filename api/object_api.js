@@ -48,6 +48,11 @@ api.get('/vertices', async function(req, res, next) {
 
 	var jsonObj = JSON.stringify({'planes':plane_with_vertices});
 
+	var parsedObj = JSON.parse(jsonObj)
+
+	console.log(parsedObj["planes"][0])
+
+
 
 	return res.json(jsonObj)
 
