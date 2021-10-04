@@ -20,7 +20,8 @@ api.get('/vertices', async function(req, res, next) {
 	let rawdata = fs.readFileSync('vertices.json');
 	let vertices_per_plane = JSON.parse(rawdata);
 
-	let the_vertices = [];
+
+	var plane_with_vertices = [];
 
 	var vertices = vertices_per_plane['planes']
 	var x;
@@ -28,17 +29,25 @@ api.get('/vertices', async function(req, res, next) {
 	var z;
 
 
-	for (let i = 0; i < vertices.length; i++) {
-		x = parseFloat(vertices[i][0])
-		y = parseFloat(vertices[i][1])
-		z = parseFloat(vertices[i][2])
+	for (let index = 0; index < vertices.length; index++) {
 
-		the_vertices.push([x, y, z])
-		// console.log([x, y, z])
+		var specific_plane = vertices[index]
+		let the_vertices_per_plane = [];
 
-	}
 
-	var jsonObj = JSON.stringify({'planes':the_vertices});
+		for (let i = 0; i < specific_plane.length; i++) {
+			x = parseFloat(specific_plane[i][0])
+			y = parseFloat(specific_plane[i][1])
+			z = parseFloat(specific_plane[i][2])
+
+			the_vertices_per_plane.push([x, y, z])
+
+		}
+		plane_with_vertices.push(the_vertices_per_plane)
+}
+
+	var jsonObj = JSON.stringify({'planes':plane_with_vertices});
+
 
 	return res.json(jsonObj)
 

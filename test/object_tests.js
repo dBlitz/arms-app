@@ -13,7 +13,7 @@ describe('/GET Object Vertices', () => {
   it('it should respond with an object vertices per plane', (done) => {
     chai.request(app)
     .get('/object/vertices')
-    // .set('Accept', 'application/json')
+    .set('Accept', 'application/json')
     .end((err, res) => {
       res.should.have.status(200);
       console.log(res.body);
