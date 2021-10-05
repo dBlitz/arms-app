@@ -16,7 +16,6 @@ api.use((req, res, next) => {
 });
 
 api.get('/vertices', async function(req, res, next) {
-
 	let rawdata = fs.readFileSync('vertices.json');
 	let vertices_per_plane = JSON.parse(rawdata);
 
@@ -34,7 +33,6 @@ api.get('/vertices', async function(req, res, next) {
 		var specific_plane = vertices[index]
 		let the_vertices_per_plane = [];
 
-
 		for (let i = 0; i < specific_plane.length; i++) {
 			x = parseFloat(specific_plane[i][0])
 			y = parseFloat(specific_plane[i][1])
@@ -47,12 +45,8 @@ api.get('/vertices', async function(req, res, next) {
 }
 
 	var jsonObj = JSON.stringify({'planes':plane_with_vertices});
-
 	var parsedObj = JSON.parse(jsonObj)
-
 	console.log(parsedObj["planes"][0])
-
-
 
 	return res.json(jsonObj)
 
@@ -62,6 +56,78 @@ api.get('/vertices', async function(req, res, next) {
 
 });
 
+api.get('/polygons', async function(req, res, next) {
+	let rawdata = fs.readFileSync('square-hole.json');
+	let polygons_per_plane = JSON.parse(rawdata);
+
+
+	var plane_with_vertices = [];
+
+	var planes = polygons_per_plane['planes']
+	var the_polygon;
+	var the_vertex;
+	var x;
+	var y;
+	var z;
+	// console.log(planes)
+	// console.log(planes[0])
+
+	for (let i = 0; i < planes.length; i++) {
+		for (let j = 0; j < planes[i].length; j++) {
+			the_polygon = planes[i][j]
+			for (let k = 0; k < the_polygon.length; k++) {
+				the_vertex = the_polygon[k]
+
+				// console.log([k])
+				// console.log("\n")
+				x = parseFloat(the_vertex[0])
+				y = parseFloat(the_vertex[1])
+				z = parseFloat(the_vertex[2])
+
+				console.log([x,y,z])
+				console.log("\n")
+    
+    // the_points.push( new THREE.Vector3( x, y, z ) );
+			}
+		}
+	}
+
+
+
+
+// 	for (let index = 0; index < vertices.length; index++) {
+
+// 		var specific_plane = vertices[index]
+// 		let the_vertices_per_plane = [];
+
+
+// 		for (let i = 0; i < specific_plane.length; i++) {
+// 			x = parseFloat(specific_plane[i][0])
+// 			y = parseFloat(specific_plane[i][1])
+// 			z = parseFloat(specific_plane[i][2])
+
+// 			the_vertices_per_plane.push([x, y, z])
+
+// 		}
+// 		plane_with_vertices.push(the_vertices_per_plane)
+// }
+
+// 	var jsonObj = JSON.stringify({'planes':plane_with_vertices});
+
+// 	var parsedObj = JSON.parse(jsonObj)
+
+// 	console.log(parsedObj["planes"][0])
+
+
+	return res.json("hello")
+
+	// return res.json(jsonObj)
+
+	// return res.json()
+	// var all_users = await user_controller.getUsers_All();
+ // 	return res.json(all_users);
+
+});
 // GET All Users
 // api.get('/all', async function(req, res, next) {
 // 	var all_users = await user_controller.getUsers_All();

@@ -8,11 +8,10 @@ let should = chai.should();
 let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 chai.use(chaiHttp);
 
-
-describe('/GET Object Vertices', () => {
+describe('/GET Polygon from each Plane', () => {
   it('it should respond with an object vertices per plane', (done) => {
     chai.request(app)
-    .get('/object/vertices')
+    .get('/object/polygons')
     .set('Accept', 'application/json')
     .end((err, res) => {
       res.should.have.status(200);
@@ -21,6 +20,20 @@ describe('/GET Object Vertices', () => {
     });
   });
 });
+
+// describe('/GET Object Vertices', () => {
+//   it('it should respond with an object vertices per plane', (done) => {
+//     chai.request(app)
+//     .get('/object/vertices')
+//     .set('Accept', 'application/json')
+//     .end((err, res) => {
+//       res.should.have.status(200);
+//       console.log(res.body);
+//       done();
+//     });
+//   });
+// });
+
 
 // describe('/POST Create User', () => {
 //   it('it should create a User', (done) => {
